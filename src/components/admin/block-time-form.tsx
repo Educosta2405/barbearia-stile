@@ -59,7 +59,7 @@ export function BlockTimeForm({
           id="barberId"
           name="barberId"
           required
-          className="h-11 w-full rounded-xl border border-nardo-line/60 bg-ink-850/80 px-4 text-sm text-silver-bright focus:border-gold-soft/70 focus:outline-none"
+          className="h-11 w-full cursor-pointer rounded-xl border border-nardo-line/60 bg-ink-850/80 px-4 text-sm text-silver-bright transition-all duration-200 focus:border-gold-soft/70 focus:bg-ink-800 focus:outline-none focus:ring-2 focus:ring-gold-glow/25"
         >
           {barbers.map((b) => (
             <option key={b.id} value={b.id}>

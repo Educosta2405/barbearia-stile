@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/button";
+import { CloseIcon } from "@/components/ui/icons";
 import { upcomingDays, type Slot } from "@/lib/booking-days";
 import { rescheduleAppointmentAction } from "@/server/actions/appointments";
 
@@ -65,8 +66,12 @@ export function RescheduleDialog({
           <h3 className="font-display text-lg font-semibold text-silver-bright">
             Reagendar
           </h3>
-          <button onClick={onClose} className="text-silver-dim hover:text-silver-bright">
-            ✕
+          <button
+            onClick={onClose}
+            aria-label="Fechar"
+            className="focus-ring grid h-8 w-8 cursor-pointer place-items-center rounded-lg text-silver-dim transition-colors hover:text-silver-bright"
+          >
+            <CloseIcon className="h-5 w-5" />
           </button>
         </div>
 
@@ -76,10 +81,10 @@ export function RescheduleDialog({
               key={d.iso}
               onClick={() => setDate(d.iso)}
               className={cn(
-                "flex shrink-0 flex-col items-center rounded-xl border px-3 py-2",
+                "focus-ring flex shrink-0 cursor-pointer flex-col items-center rounded-xl border px-3 py-2 transition-colors",
                 date === d.iso
                   ? "border-gold-soft/60 bg-gold-soft/10"
-                  : "border-nardo-line/50 bg-ink-800/50",
+                  : "border-nardo-line/50 bg-ink-800/50 hover:border-gold/40",
               )}
             >
               <span className="text-[11px] uppercase text-silver-dim">{d.weekday}</span>

@@ -211,7 +211,7 @@ export default async function HomePage() {
             <Reveal key={s.id} delay={i * 50}>
               <Link
                 href={ctaHref}
-                className="group hover-lift flex h-full flex-col rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-colors hover:border-gold/45"
+                className="group hover-lift focus-ring flex h-full flex-col rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-colors hover:border-gold/45"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-nardo-line/50 bg-ink-700/60 text-silver transition-colors group-hover:border-gold/40 group-hover:text-gold-glow">
                   <ScissorsIcon className="h-5 w-5" />
@@ -244,7 +244,7 @@ export default async function HomePage() {
             <Reveal key={b.id} delay={i * 50}>
               <Link
                 href={ctaHref}
-                className="group hover-lift flex h-full items-center gap-4 rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-colors hover:border-gold/45"
+                className="group hover-lift focus-ring flex h-full items-center gap-4 rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-colors hover:border-gold/45"
               >
                 <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold/25 bg-gradient-to-br from-ink-700 to-ink-600 font-display text-xl font-semibold text-gold-glow">
                   {(b.user.name ?? "B").charAt(0)}

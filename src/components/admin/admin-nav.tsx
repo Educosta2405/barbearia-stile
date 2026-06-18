@@ -22,7 +22,7 @@ export function AdminNav() {
             key={l.href}
             href={l.href}
             className={cn(
-              "relative whitespace-nowrap px-4 py-2.5 text-sm transition-colors",
+              "focus-ring relative whitespace-nowrap rounded-md px-4 py-2.5 text-sm transition-colors",
               active ? "text-silver-bright" : "text-silver-dim hover:text-silver",
             )}
           >

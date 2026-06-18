@@ -15,14 +15,14 @@ export type Summary = {
 
 const CARDS = [
   { key: "today", label: "Agendamentos hoje", icon: <CalendarIcon />, tone: "gold" },
-  { key: "pending", label: "Pendentes", icon: <ClockIcon />, tone: "amber" },
+  { key: "pending", label: "Pendentes", icon: <ClockIcon />, tone: "pending" },
   { key: "completed", label: "Concluídos", icon: <StarIcon />, tone: "silver" },
   { key: "blocked", label: "Horários bloqueados", icon: <RazorIcon />, tone: "nardo" },
 ] as const;
 
 const TONE: Record<string, string> = {
   gold: "border-gold/35 bg-gold/[0.07] text-gold-glow",
-  amber: "border-amber-400/25 bg-amber-400/[0.06] text-amber-300",
+  pending: "border-nardo-line/70 bg-ink-700/40 text-silver-dim",
   silver: "border-nardo-line/60 bg-ink-700/50 text-silver-bright",
   nardo: "border-nardo-line/50 bg-ink-700/40 text-silver",
 };

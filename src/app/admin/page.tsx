@@ -9,6 +9,7 @@ import {
   type AgendaView,
 } from "@/lib/agenda-range";
 import { StatusBadge } from "@/components/ui/badge";
+import { ArrowRightIcon } from "@/components/ui/icons";
 import { AppointmentActions } from "@/components/admin/appointment-actions";
 import { BlockTimeForm } from "@/components/admin/block-time-form";
 import { SummaryCards } from "@/components/admin/summary-cards";
@@ -111,18 +112,20 @@ export default async function AgendaPage({
         <div className="flex items-center gap-2">
           <Link
             href={`/admin?view=${view}&date=${prev}`}
-            className="rounded-lg border border-nardo-line/50 px-3 py-1.5 text-sm text-silver-dim hover:text-silver-bright"
+            aria-label="Período anterior"
+            className="focus-ring grid h-8 w-8 cursor-pointer place-items-center rounded-lg border border-nardo-line/50 text-silver-dim transition-colors hover:border-gold/40 hover:text-silver-bright"
           >
-            ←
+            <ArrowRightIcon className="h-4 w-4 rotate-180" />
           </Link>
           <span className="min-w-44 text-center text-sm font-medium capitalize text-silver-bright">
             {rangeLabel}
           </span>
           <Link
             href={`/admin?view=${view}&date=${next}`}
-            className="rounded-lg border border-nardo-line/50 px-3 py-1.5 text-sm text-silver-dim hover:text-silver-bright"
+            aria-label="Próximo período"
+            className="focus-ring grid h-8 w-8 cursor-pointer place-items-center rounded-lg border border-nardo-line/50 text-silver-dim transition-colors hover:border-gold/40 hover:text-silver-bright"
           >
-            →
+            <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
 
@@ -132,7 +135,7 @@ export default async function AgendaPage({
               key={v.key}
               href={`/admin?view=${v.key}&date=${baseISO}`}
               className={cn(
-                "rounded-lg px-3 py-1.5 text-sm transition-colors",
+                "focus-ring cursor-pointer rounded-lg px-3 py-1.5 text-sm transition-colors",
                 view === v.key
                   ? "bg-gold-soft/15 text-silver-bright"
                   : "text-silver-dim hover:text-silver",

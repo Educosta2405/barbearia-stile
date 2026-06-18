@@ -53,6 +53,11 @@
     @apply transition-all duration-300 ease-out hover:-translate-y-0.5;
   }
 
+  /* Anel de foco de teclado consistente (acessibilidade) */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-glow/50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900;
+  }
+
   /* Linha divisória sutil */
   .hairline {
     @apply border-nardo-line/50;

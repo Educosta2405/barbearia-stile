@@ -20,7 +20,7 @@ export default async function AdminLayout({
           <div>
             <p className="eyebrow">Painel administrativo</p>
             <h1 className="mt-1.5 font-display text-2xl font-semibold tracking-tight text-silver-bright sm:text-3xl">
-              Olá, {firstName} 👋
+              Olá, {firstName}
             </h1>
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/[0.07] px-3 py-1 text-xs font-medium text-gold-glow">

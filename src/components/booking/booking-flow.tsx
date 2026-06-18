@@ -182,7 +182,7 @@ export function BookingFlow({
                   setStep(3);
                 }}
                 className={cn(
-                  "hover-lift flex flex-col items-center rounded-xl border px-2 py-3 text-center transition-colors",
+                  "hover-lift focus-ring flex cursor-pointer flex-col items-center rounded-xl border px-2 py-3 text-center transition-colors",
                   date === d.iso
                     ? "border-gold-soft/60 bg-gold-soft/10"
                     : "border-nardo-line/50 bg-ink-800/50 hover:border-gold-soft/40",
@@ -220,7 +220,7 @@ export function BookingFlow({
                         setStep(4);
                       }}
                       className={cn(
-                        "hover-lift rounded-xl border py-2.5 text-sm font-medium transition-colors",
+                        "hover-lift focus-ring cursor-pointer rounded-xl border py-2.5 text-sm font-medium transition-colors",
                         slot?.startTime === s.startTime
                           ? "border-gold-soft/60 bg-gold-soft/10 text-silver-bright"
                           : "border-nardo-line/50 bg-ink-800/50 text-silver hover:border-gold-soft/40",
@@ -282,9 +282,10 @@ export function BookingFlow({
       {step > 0 && !done && (
         <button
           onClick={() => setStep((s) => Math.max(0, s - 1))}
-          className="mt-6 text-sm text-silver-dim transition-colors hover:text-silver-bright"
+          className="focus-ring mt-6 inline-flex cursor-pointer items-center gap-1.5 rounded-lg text-sm text-silver-dim transition-colors hover:text-silver-bright"
         >
-          ← Voltar
+          <ArrowRightIcon className="h-4 w-4 rotate-180" />
+          Voltar
         </button>
       )}
     </div>
@@ -342,7 +343,7 @@ function SelectCard({
     <button
       onClick={onClick}
       className={cn(
-        "group hover-lift relative flex items-center gap-3 overflow-hidden rounded-2xl border p-4 text-left transition-all",
+        "group hover-lift focus-ring relative flex cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border p-4 text-left transition-all",
         active
           ? "border-gold/55 bg-gold/[0.08] shadow-[inset_0_0_0_1px_rgba(200,162,74,0.25)]"
           : "border-nardo-line/50 bg-ink-800/50 hover:border-gold/40 hover:bg-ink-800/70",

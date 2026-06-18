@@ -8,7 +8,7 @@ export const Input = forwardRef<
   <input
     ref={ref}
     className={cn(
-      "h-11 w-full rounded-xl border border-nardo-line/60 bg-ink-850/80 px-4 text-sm text-silver-bright placeholder:text-silver-dim/60",
+      "h-11 w-full rounded-xl border border-nardo-line/60 bg-ink-850/80 px-4 text-sm text-silver-bright placeholder:text-silver-dim/70",
       "transition-all duration-200 focus:border-gold-soft/70 focus:bg-ink-800 focus:outline-none focus:ring-2 focus:ring-gold-glow/25",
       className,
     )}
@@ -39,7 +39,7 @@ export const Textarea = forwardRef<
   <textarea
     ref={ref}
     className={cn(
-      "w-full rounded-xl border border-nardo-line/60 bg-ink-850/80 px-4 py-3 text-sm text-silver-bright placeholder:text-silver-dim/60",
+      "w-full rounded-xl border border-nardo-line/60 bg-ink-850/80 px-4 py-3 text-sm text-silver-bright placeholder:text-silver-dim/70",
       "transition-all duration-200 focus:border-gold-soft/70 focus:bg-ink-800 focus:outline-none focus:ring-2 focus:ring-gold-glow/25",
       className,
     )}
