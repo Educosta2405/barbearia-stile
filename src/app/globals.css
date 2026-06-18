@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-900 text-silver antialiased;
+    background-image:
+      radial-gradient(55% 45% at 50% -10%, rgba(200, 162, 74, 0.10), transparent 60%),
+      radial-gradient(40% 30% at 100% 0%, rgba(200, 162, 74, 0.05), transparent 70%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(200, 162, 74, 0.30);
+    color: #0b0b0d;
+  }
+
+  /* Scrollbar discreta */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2c31;
+    border-radius: 8px;
+    border: 2px solid #0b0b0d;
+  }
+}
+
+@layer components {
+  /* Vidro fosco premium */
+  .glass {
+    @apply border border-nardo-line/60 bg-ink-800/70 backdrop-blur-xl;
+  }
+
+  /* Texto com gradiente prata→dourado para destaques */
+  .text-gradient {
+    @apply bg-gradient-to-br from-silver-bright via-gold-soft to-gold bg-clip-text text-transparent;
+  }
+
+  /* Microinteração de hover refinada em cards/botões */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-0.5;
+  }
+
+  /* Linha divisória sutil */
+  .hairline {
+    @apply border-nardo-line/50;
+  }
+
+  /* Divisor com fio dourado, esmaecendo nas pontas */
+  .gold-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/35 to-transparent;
+  }
+
+  /* Textura discreta de linhas diagonais (quase imperceptível) */
+  .surface-texture {
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.014) 0,
+      rgba(255, 255, 255, 0.014) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+  }
+
+  /* Eyebrow / rótulo de seção em dourado */
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.28em] text-gold;
+  }
+}
+
+@layer utilities {
+  /* Atrasos para revelar em cascata */
+  .delay-1 { animation-delay: 0.05s; }
+  .delay-2 { animation-delay: 0.12s; }
+  .delay-3 { animation-delay: 0.2s; }
+  .delay-4 { animation-delay: 0.3s; }
+  .delay-5 { animation-delay: 0.4s; }
+
+  /* Estado inicial para elementos que serão revelados via JS (Reveal) */
+  .reveal-init {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(10px);
+  }
+  .reveal-show {
+    animation: blur-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}

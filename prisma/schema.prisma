@@ -1,0 +1,180 @@
+// ============================================================
+// Barbearia Agendamento — modelo de dados
+// ------------------------------------------------------------
+// Dev: SQLite. Para produção, troque o provider para "postgresql".
+// SQLite não suporta enum: usamos String + enums de TS/Zod na app
+// (ver src/lib/enums.ts). Isso mantém o modelo 100% portável.
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------
+// Auth.js (NextAuth) — tabelas padrão do Prisma Adapter
+// ------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  phone         String?
+  passwordHash  String? // login por credenciais (e-mail/senha)
+  role          String    @default("CUSTOMER") // CUSTOMER | BARBER | ADMIN
+
+  accounts     Account[]
+  sessions     Session[]
+  barber       Barber? // perfil, se este usuário for um barbeiro
+  appointments Appointment[] @relation("CustomerAppointments")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ------------------------------------------------------------
+// Domínio da barbearia
+// ------------------------------------------------------------
+
+model Barber {
+  id       String  @id @default(cuid())
+  userId   String  @unique
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio      String?
+  active   Boolean @default(true)
+
+  appointments Appointment[]
+  timeOffs     TimeOff[]
+  // serviços que este barbeiro executa (N:N)
+  services     BarberService[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id              String  @id @default(cuid())
+  name            String
+  description     String?
+  // duração em minutos — usada para calcular o slot e detectar conflito
+  durationMinutes Int
+  priceCents      Int     @default(0)
+  active          Boolean @default(true)
+
+  appointments Appointment[]
+  barbers      BarberService[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Tabela de junção Barbeiro <-> Serviço
+model BarberService {
+  barberId  String
+  serviceId String
+  barber    Barber  @relation(fields: [barberId], references: [id], onDelete: Cascade)
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([barberId, serviceId])
+}
+
+model Appointment {
+  id         String   @id @default(cuid())
+  customerId String
+  barberId   String
+  serviceId  String
+
+  startTime DateTime
+  endTime   DateTime
+  status    String   @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED | NO_SHOW
+  notes     String?
+
+  customer User    @relation("CustomerAppointments", fields: [customerId], references: [id])
+  barber   Barber  @relation(fields: [barberId], references: [id])
+  service  Service @relation(fields: [serviceId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ---- ANTI-OVERBOOKING ----
+  // Dois agendamentos não podem começar no mesmo horário com o mesmo barbeiro.
+  // A checagem de SOBREPOSIÇÃO de duração é feita em transação no service layer.
+  @@unique([barberId, startTime])
+  @@index([barberId, startTime])
+  @@index([customerId])
+  @@index([status])
+}
+
+// Horários bloqueados (folga, almoço, feriado) por barbeiro
+model TimeOff {
+  id        String   @id @default(cuid())
+  barberId  String
+  barber    Barber   @relation(fields: [barberId], references: [id], onDelete: Cascade)
+  startTime DateTime
+  endTime   DateTime
+  reason    String?
+
+  createdAt DateTime @default(now())
+
+  @@index([barberId, startTime])
+}
+
+// Registro de notificações enviadas (auditoria / reenvio)
+model Notification {
+  id            String    @id @default(cuid())
+  appointmentId String?
+  channel       String    @default("EMAIL") // EMAIL (futuro: WHATSAPP, SMS)
+  type          String // CONFIRMATION | CANCELLATION | REMINDER | RESCHEDULE
+  recipient     String // e-mail de destino
+  status        String    @default("PENDING") // PENDING | SENT | FAILED
+  sentAt        DateTime?
+  error         String?
+
+  createdAt DateTime @default(now())
+
+  @@index([appointmentId])
+  @@index([status])
+}
