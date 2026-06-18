@@ -33,3 +33,6 @@ yarn-error.log*
 
 # testing
 /coverage
+
+# antigravity / ui-ux-pro-max skill — manter apenas local (não versionar)
+.agent/
