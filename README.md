@@ -1,7 +1,13 @@
-# Barbearia · Agendamento
+# Stile · Sistema de Agendamento para Barbearia
 
-Sistema profissional de agendamento para barbearia, preparado para produção.
-Next.js 15 (App Router) + TypeScript, Prisma, Auth.js e Tailwind.
+Sistema full stack de agendamento para a barbearia **Stile**: o cliente agenda
+serviços (corte, barba, sobrancelha, progressiva) e a barbearia gerencia a
+agenda, sem conflito de horário. Next.js 15 (App Router) + TypeScript, Prisma,
+Auth.js e Tailwind.
+
+> 📚 **Trabalho acadêmico (Engenharia de Software):** veja
+> [`APRESENTACAO_ACADEMICA.md`](APRESENTACAO_ACADEMICA.md) (documento completo) e
+> [`RESUMO_APRESENTACAO.md`](RESUMO_APRESENTACAO.md) (roteiro de apresentação).
 
 ## Stack
 
@@ -12,17 +18,40 @@ Next.js 15 (App Router) + TypeScript, Prisma, Auth.js e Tailwind.
 - **Resend** — notificações por e-mail (com fallback de log no dev)
 - **Zod** — validação ponta a ponta
 
-## Como rodar (dev)
+## Pré-requisitos
+
+- **Node.js 20 LTS** (ou superior) e **npm**
+- **Git**
+- Não precisa instalar banco de dados: o ambiente de desenvolvimento usa
+  **SQLite** (um arquivo local criado automaticamente).
+
+## Como clonar e rodar (desenvolvimento)
 
 ```bash
+# 1. Clonar o repositório
+git clone https://github.com/Educosta2405/barbearia-stile.git
+cd barbearia-stile
+
+# 2. Instalar as dependências
 npm install
-cp .env.example .env      # já existe um .env de dev com SQLite
-npm run db:migrate        # cria o banco (SQLite: prisma/dev.db)
-npm run db:seed           # popula serviços + admin + barbeiros
-npm run dev               # http://localhost:3000
+
+# 3. Criar o arquivo .env a partir do exemplo
+cp .env.example .env        # Windows (PowerShell/cmd): copy .env.example .env
+
+# 4. Criar o banco SQLite e aplicar as migrations
+npm run db:migrate
+
+# 5. Popular dados de exemplo (serviços, admin e barbeiros)
+npm run db:seed
+
+# 6. Iniciar o projeto
+npm run dev                 # abre em http://localhost:3000
 ```
 
-### Acessos de teste (seed)
+> O `.env.example` já vem pronto para desenvolvimento (SQLite). Não é preciso
+> editar nada para rodar localmente.
+
+### Acessos de teste (criados pelo seed)
 
 | Papel    | E-mail                  | Senha       |
 | -------- | ----------------------- | ----------- |
@@ -31,6 +60,28 @@ npm run dev               # http://localhost:3000
 | Barbeiro | marcos@barbearia.dev    | barber123   |
 
 Clientes criam a própria conta em `/cadastro`.
+
+### Rotas principais
+
+| Rota              | Tela                          | Acesso          |
+| ----------------- | ----------------------------- | --------------- |
+| `/`               | Home (apresentação)           | Público         |
+| `/login`          | Entrar                        | Público         |
+| `/cadastro`       | Criar conta                   | Público         |
+| `/agendar`        | Fluxo de agendamento          | Cliente logado  |
+| `/perfil`         | Meus horários (cliente)       | Cliente logado  |
+| `/admin`          | Painel / agenda               | Barbeiro/Admin  |
+| `/admin/servicos` | Gestão de serviços            | Barbeiro/Admin  |
+| `/admin/barbeiros`| Gestão de barbeiros           | Barbeiro/Admin  |
+| `/admin/clientes` | Lista de clientes             | Barbeiro/Admin  |
+
+### Verificar qualidade (opcional)
+
+```bash
+npm run typecheck   # checagem de tipos (TypeScript)
+npm test            # testes de unidade do núcleo (Vitest)
+npm run build       # build de produção
+```
 
 ## Scripts
 
