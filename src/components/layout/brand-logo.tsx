@@ -40,7 +40,7 @@ export function BrandLogo({
         <span className="flex flex-col leading-none">
           <span
             className={cn(
-              "font-display font-semibold tracking-[0.04em] text-silver-bright",
+              "font-serif font-semibold tracking-[0.02em] text-silver-bright",
               nameSize,
             )}
           >

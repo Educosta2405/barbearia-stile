@@ -114,29 +114,41 @@ export default async function HomePage() {
       <Navbar />
 
       {/* HERO */}
-      <section className="surface-texture relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_-5%,rgba(200,162,74,0.12),transparent_60%)]" />
-        <div className="mx-auto max-w-5xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pt-24">
+      <section className="relative overflow-hidden">
+        {/* fundo em camadas: textura + brilho dourado no topo + vinheta na base */}
+        <div className="surface-texture pointer-events-none absolute inset-0 -z-10" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_42%_at_50%_-8%,rgba(200,162,74,0.16),transparent_62%)]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-ink-950/70" />
+
+        <div className="mx-auto max-w-5xl px-4 pb-20 pt-20 text-center sm:px-6 sm:pb-24 sm:pt-28">
+          {/* logo com brilho dourado sutil */}
           <div className="flex animate-blur-in justify-center">
-            <BrandLogo href={null} showName={false} size="lg" />
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(200,162,74,0.22),transparent_70%)] blur-2xl" />
+              <BrandLogo href={null} showName={false} size="lg" />
+            </div>
           </div>
-          <div className="mt-5 flex animate-fade-in items-center justify-center gap-3 text-gold/70">
-            <RazorIcon className="h-4 w-4" />
+
+          {/* eyebrow com ornamento dourado */}
+          <div className="mt-6 flex animate-fade-in items-center justify-center gap-3 text-gold/80 delay-1">
+            <span className="hidden h-px w-8 bg-gradient-to-r from-transparent to-gold/50 sm:block" />
+            <ScissorsIcon className="h-4 w-4" />
             <p className="eyebrow">
               {BRAND.name} · desde {BRAND.foundedYear}
             </p>
-            <ScissorsIcon className="h-4 w-4" />
+            <RazorIcon className="h-4 w-4" />
+            <span className="hidden h-px w-8 bg-gradient-to-l from-transparent to-gold/50 sm:block" />
           </div>
 
-          <h1 className="mt-6 animate-blur-in font-display text-4xl font-bold leading-[1.04] tracking-tight text-silver-bright sm:text-6xl">
-            Estilo é detalhe.
-            <br className="hidden sm:block" />{" "}
+          <h1 className="mx-auto mt-7 max-w-3xl animate-blur-in text-balance font-serif text-4xl font-semibold leading-[1.08] tracking-tight text-silver-bright sm:text-5xl lg:text-6xl">
+            Estilo é detalhe.{" "}
             <span className="text-gradient">Precisão</span> é assinatura.
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl animate-fade-up text-balance text-base text-silver-dim delay-2 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-xl animate-fade-up text-balance text-base leading-relaxed text-silver-dim delay-2 sm:text-lg">
             Cortes, barba e cuidados executados por profissionais especializados,
-            em um ambiente pensado para a sua experiência. Agende em segundos.
+            em um ambiente pensado para a sua experiência.{" "}
+            <span className="text-silver">Hora marcada, sem espera.</span>
           </p>
 
           <div className="mt-9 flex animate-fade-up flex-col items-center justify-center gap-3 delay-3 sm:flex-row">
@@ -159,15 +171,26 @@ export default async function HomePage() {
             </a>
           </div>
 
-          <p className="mt-6 animate-fade-in text-xs text-silver-dim delay-4">
-            {BRAND.hoursWeekday} · {BRAND.hoursSaturday}
-          </p>
+          {/* selo de confiança */}
+          <ul className="mx-auto mt-8 flex max-w-xl animate-fade-in flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-silver-dim delay-4">
+            <li className="inline-flex items-center gap-1.5">
+              <CalendarIcon className="h-3.5 w-3.5 text-gold" /> Hora marcada
+            </li>
+            <li className="text-nardo-line/70">•</li>
+            <li className="inline-flex items-center gap-1.5">
+              <ScissorsIcon className="h-3.5 w-3.5 text-gold" /> Profissionais especializados
+            </li>
+            <li className="text-nardo-line/70">•</li>
+            <li className="inline-flex items-center gap-1.5">
+              <StarIcon className="h-3.5 w-3.5 text-gold" /> Ambiente premium
+            </li>
+          </ul>
         </div>
         <div className="gold-divider" />
       </section>
 
       {/* ACESSO RÁPIDO */}
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20 sm:px-6">
         <SectionHeading eyebrow="Navegação" title="Acesso rápido" />
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {access.map((item, i) => (
@@ -179,12 +202,12 @@ export default async function HomePage() {
       </section>
 
       {/* DIFERENCIAIS */}
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20 sm:px-6">
         <SectionHeading eyebrow="Por que a casa" title={`A experiência ${BRAND.short}`} />
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {DIFERENCIAIS.map((d, i) => (
             <Reveal key={d.title} delay={i * 50}>
-              <div className="hover-lift h-full rounded-2xl border border-nardo-line/50 bg-ink-800/50 p-5 shadow-card hover:border-gold/40">
+              <div className="hover-lift h-full rounded-2xl border border-nardo-line/50 bg-ink-800/50 p-6 shadow-card transition-all duration-300 hover:border-gold/45 hover:shadow-[0_18px_46px_-24px_rgba(200,162,74,0.32)]">
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/30 bg-gold/[0.07] text-gold-glow">
                   {d.icon}
                 </span>
@@ -199,7 +222,7 @@ export default async function HomePage() {
       </section>
 
       {/* SERVIÇOS */}
-      <section id="servicos" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:px-6">
+      <section id="servicos" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:py-20 sm:px-6">
         <SectionHeading
           eyebrow="O que fazemos"
           title="Serviços"
@@ -211,7 +234,7 @@ export default async function HomePage() {
             <Reveal key={s.id} delay={i * 50}>
               <Link
                 href={ctaHref}
-                className="group hover-lift focus-ring flex h-full flex-col rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-colors hover:border-gold/45"
+                className="group hover-lift focus-ring flex h-full flex-col rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-all duration-300 hover:border-gold/45 hover:shadow-[0_18px_46px_-24px_rgba(200,162,74,0.35)]"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-nardo-line/50 bg-ink-700/60 text-silver transition-colors group-hover:border-gold/40 group-hover:text-gold-glow">
                   <ScissorsIcon className="h-5 w-5" />
@@ -233,7 +256,7 @@ export default async function HomePage() {
       </section>
 
       {/* BARBEIROS */}
-      <section id="barbeiros" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-12 sm:px-6">
+      <section id="barbeiros" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:py-20 sm:px-6">
         <SectionHeading
           eyebrow="Quem cuida de você"
           title="Nossos barbeiros"
@@ -244,9 +267,9 @@ export default async function HomePage() {
             <Reveal key={b.id} delay={i * 50}>
               <Link
                 href={ctaHref}
-                className="group hover-lift focus-ring flex h-full items-center gap-4 rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-colors hover:border-gold/45"
+                className="group hover-lift focus-ring flex h-full items-center gap-4 rounded-2xl border border-nardo-line/50 bg-ink-800/60 p-5 shadow-card transition-all duration-300 hover:border-gold/45 hover:shadow-[0_18px_46px_-24px_rgba(200,162,74,0.35)]"
               >
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold/25 bg-gradient-to-br from-ink-700 to-ink-600 font-display text-xl font-semibold text-gold-glow">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold/25 bg-gradient-to-br from-ink-700 to-ink-600 font-serif text-xl font-semibold text-gold-glow">
                   {(b.user.name ?? "B").charAt(0)}
                 </span>
                 <div className="min-w-0 flex-1">
@@ -267,13 +290,13 @@ export default async function HomePage() {
       </section>
 
       {/* CONTATO / LOCALIZAÇÃO */}
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20 sm:px-6">
         <Reveal>
           <div className="surface-texture overflow-hidden rounded-3xl border border-gold/25 bg-gradient-to-b from-ink-800/80 to-ink-850 shadow-card">
             <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-2">
               <div>
                 <p className="eyebrow">Visite-nos</p>
-                <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight text-silver-bright sm:text-3xl">
+                <h2 className="mt-2.5 font-serif text-3xl font-semibold tracking-tight text-silver-bright sm:text-4xl">
                   Venha tomar um café e sair renovado.
                 </h2>
                 <ul className="mt-6 space-y-3 text-sm">

@@ -37,7 +37,7 @@ export default async function PerfilPage() {
         <header className="mb-8 flex flex-wrap items-end justify-between gap-3 animate-fade-up">
           <div>
             <p className="eyebrow">Área do cliente</p>
-            <h1 className="mt-1.5 font-display text-3xl font-semibold tracking-tight text-silver-bright">
+            <h1 className="mt-1.5 font-serif text-3xl font-semibold tracking-tight text-silver-bright sm:text-4xl">
               Meus horários
             </h1>
             <p className="mt-1 text-silver-dim">Olá, {user.name?.split(" ")[0] ?? "cliente"}.</p>

@@ -19,7 +19,7 @@ export function AccessCard({ item }: { item: AccessItem }) {
     <Link
       href={item.href}
       className={cn(
-        "group relative flex h-full flex-col rounded-2xl border p-5 shadow-card transition-all duration-300 ease-out hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-glow/50",
+        "group relative flex h-full flex-col rounded-2xl border p-5 shadow-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_46px_-24px_rgba(200,162,74,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-glow/50",
         item.highlight
           ? "border-gold/45 bg-gradient-to-b from-gold/[0.08] to-transparent hover:border-gold/70"
           : "border-nardo-line/50 bg-ink-800/60 hover:border-gold/40 hover:bg-ink-800/80",

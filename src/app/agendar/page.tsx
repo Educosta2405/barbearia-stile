@@ -40,7 +40,7 @@ export default async function AgendarPage() {
       <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
         <header className="mb-8 animate-fade-up">
           <p className="eyebrow">Novo agendamento</p>
-          <h1 className="mt-1.5 font-display text-3xl font-semibold tracking-tight text-silver-bright">
+          <h1 className="mt-1.5 font-serif text-3xl font-semibold tracking-tight text-silver-bright sm:text-4xl">
             Agendar horário
           </h1>
           <p className="mt-1 text-silver-dim">

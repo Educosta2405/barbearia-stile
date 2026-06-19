@@ -19,7 +19,7 @@ export function AuthShell({
 
         <Card>
           <CardBody className="p-6 sm:p-8">
-            <h1 className="font-display text-2xl font-semibold tracking-tight text-silver-bright">
+            <h1 className="font-serif text-2xl font-semibold tracking-tight text-silver-bright">
               {title}
             </h1>
             <p className="mb-6 mt-1 text-sm text-silver-dim">{subtitle}</p>

@@ -37,6 +37,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(200,162,74,0.30), 0 8px 40px -12px rgba(200,162,74,0.40)",

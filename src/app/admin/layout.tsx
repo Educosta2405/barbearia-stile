@@ -19,7 +19,7 @@ export default async function AdminLayout({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="eyebrow">Painel administrativo</p>
-            <h1 className="mt-1.5 font-display text-2xl font-semibold tracking-tight text-silver-bright sm:text-3xl">
+            <h1 className="mt-1.5 font-serif text-2xl font-semibold tracking-tight text-silver-bright sm:text-3xl">
               Olá, {firstName}
             </h1>
           </div>
